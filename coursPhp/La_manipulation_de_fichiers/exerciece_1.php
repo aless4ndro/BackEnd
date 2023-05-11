@@ -5,10 +5,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <title>Les Indispansables</title>
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #f00;
+    }
+  </style>
 </head>
 
 <body>
+
   <?php
   //Lire le fichier et stoker le contenue  dans un tableau
   $lien = file('lien.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

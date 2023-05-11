@@ -13,7 +13,6 @@ Dans le dossier modules, créez un dossier orders pour le module de gestion des 
 - orders.php : pour gérer la liste des commandes et leurs statuts.
 - add_order.php : pour créer de nouvelles commandes.
 - edit_order.php : pour modifier ou annuler les commandes.
-- view_order.php : pour afficher les détails d'une commande.
 Créez un dossier products dans le dossier modules pour le module de gestion des produits. Ajoutez-y les fichiers suivants :
 - products.php : pour gérer la liste des produits et leurs informations.
 - add_product.php : pour ajouter de nouveaux produits.
