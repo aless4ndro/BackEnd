@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData(searchForm);
     const query = formData.get("query");
 
-    fetch('/views/search_results.php?query=' + query)
+    fetch('/views/catalogue.php?query=' + query)
       .then((response) => response.text())
       .then((html) => {
         searchResults.innerHTML = html;

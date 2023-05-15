@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
   removeFromCart($productId);
 }
 
-$redirectUrl = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : './index.php';
+$redirectUrl =  './index.php';
 
 header('Location: ' . $redirectUrl);
 exit();

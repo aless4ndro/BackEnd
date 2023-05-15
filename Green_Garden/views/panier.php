@@ -25,8 +25,8 @@ if (!isset($_SESSION['cart'])) {
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "my-secret-pw";
-$dbname = "green_garden";
+$password = "new_password";
+$dbname = "greengarden";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -35,7 +35,7 @@ try {
   // Récupérer les produits du panier
   $cartProducts = [];
   foreach ($_SESSION['cart'] as $productId => $quantity) {
-    $sql = "SELECT * FROM products WHERE id = :id";
+    $sql = "SELECT * FROM t_d_produit WHERE Id_Produit = :id";
     $stmt = $conn->prepare($sql);
     $stmt->execute(['id' => $productId]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -45,11 +45,11 @@ try {
 
   // Afficher les produits du panier
   foreach ($cartProducts as $product) {
-    echo '<h2>' . $product['name'] . ' (x' . $product['quantity'] . ')</h2>';
-    echo '<img src="' . $product['image'] . '" alt="' . $product['name'] . '">';
-    echo '<p>' . $product['description'] . '</p>';
-    echo '<p>' . $product['price'] . ' €</p>';
-    echo '<a href="remove_from_cart.php?id=' . $product['id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
+    echo '<h2>' . $product['Nom_court'] . ' (x' . $product['quantity'] . ')</h2>';
+    echo '<img src="' . $product['Photo'] . '" alt="' . $product['Nom_court'] . '">';
+    echo '<p>' . $product['Nom_Long'] . '</p>';
+    echo '<p>' . $product['Prix_Achat'] . ' €</p>';
+    echo '<a href="remove_from_cart.php?id=' . $product['Id_Produit'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
   }
 } catch (PDOException $e) {
   echo "Erreur : " . $e->getMessage();

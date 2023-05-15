@@ -1,5 +1,6 @@
 <?php
-include 'cart_functions.php';
+include_once 'cart_functions.php';
+
 
 if (isset($_GET['id'])) {
   $productId = intval($_GET['id']);

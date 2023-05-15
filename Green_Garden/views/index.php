@@ -12,9 +12,10 @@
 
 <body class="d-flex flex-column min-vh-100">
   <header>
-    <?php include 'cart_functions.php'; ?>
 
-    <?php include('../includes/header.php'); ?>
+    <?php include('../includes/header.php'); 
+          include_once 'cart_functions.php';
+    ?>
     <!-- Le contenu de l'en-tête (menu, logo, etc.) sera chargé à partir du fichier header.php -->
   </header>
 
@@ -46,7 +47,7 @@
       </button>
     </div>
     <div class="catalogue mt-5">
-      <?php include 'catalogue.php'; ?>
+      <a href='catalogue.php'<h2><i class="fas fa-leaf"></i> Catalogue</h2></a>
     </div>
   </main>
 
