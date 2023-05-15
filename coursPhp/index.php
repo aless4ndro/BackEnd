@@ -179,10 +179,10 @@ echo "<br>";
 
 //1. Trouvez le numéro de semaine de la date suivante : 14/07/2019.
 
-$date = new DateTime("2019-07-14");
-echo "Le numéro de semaine de la date 14/07/2019 est " . $date->format("W");
+//$date = new DateTime("2019-07-14");
+//echo "Le numéro de semaine de la date 14/07/2019 est " . $date->format("W");
 
-echo "<hr>";
+//n,echo "<hr>";
 
 
 //Combien reste-t-il de jours avant la fin de votre formation ?
@@ -191,11 +191,14 @@ echo "<br/>";
 echo "2 Exercices";
 echo "<br>";
 
-$date = new DateTime();
-$end = new DateTime("2023-09-10");
-$interval = $date->diff($end)
+$date = new DateTime(); // Date actuelle
+$end = new DateTime("2023-09-10"); // Date de fin de formation
+$interval = $date->diff($end); // Calcule la différence entre les deux dates
 
-echo "Il reste " . $interval->format("%a") . " jours avant la fin de la formation";
+$remainingDays = $interval->format("%a"); // Récupère le nombre de jours restants
+echo "Il reste " . $remainingDays . " jours avant la fin de la formation";
+
+
 
 ?>
 
