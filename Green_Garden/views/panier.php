@@ -10,7 +10,16 @@
 </head>
 
 <body>
-
+  <div class="container mt-5 text-center">
+    <div class="jumbotron">
+      <hr class="my-4">
+      <div class="text-center">
+        <h2><i class="fas fa-shopping-cart"></i> Panier</h2>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <a class="btn btn-primary btn-lg" href="catalogue.php" role="button">Retour au catalogue</a>
+      </div>
 </body>
 
 </html>
@@ -25,7 +34,7 @@ if (!isset($_SESSION['cart'])) {
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "new_password";
+$password = "my-secret-pw";
 $dbname = "greengarden";
 
 try {

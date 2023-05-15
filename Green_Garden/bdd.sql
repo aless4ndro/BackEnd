@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `greengarden`
 --
+UPDATE t_d_produit SET Photo = 'https://media.adeo.com/marketplace/LMFR/81965592/8dabea92-60f4-4409-8503-ad5b76b21dc6.jpeg?width=650&height=650&format=jpg&quality=80&fit=bounds' WHERE Id_Produit = 6;
 
 -- --------------------------------------------------------
 
