@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
   removeFromCart($productId);
 }
 
-$redirectUrl =  './index.php';
+$redirectUrl =  './panier.php';
 
 header('Location: ' . $redirectUrl);
 exit();

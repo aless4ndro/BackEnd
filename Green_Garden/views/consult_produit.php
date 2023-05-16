@@ -2,7 +2,7 @@
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "my-secret-pw";
+$password = "new_password";
 $dbname = "greengarden";
 
 try {
@@ -24,18 +24,8 @@ try {
 $conn = null;
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
+<?php include('../includes/header.php'); ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultation produit</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Ajoutez le lien vers votre fichier CSS ici -->
-</head>
-
-<body>
 
   <div class="container mt-5">
     <div class="row">
@@ -47,7 +37,7 @@ $conn = null;
           <h1><?php echo $product['Nom_court']; ?></h1>
           <p><?php echo $product['Nom_Long']; ?></p>
           <p><?php echo $product['Prix_Achat']; ?></p>
-        </div>
+          </div>
       <?php else : ?>
         <div class="col-md-12">
           <p>Le produit n'a pas été trouvé.</p>
@@ -57,7 +47,4 @@ $conn = null;
   </div>
 
   <!-- Ajoutez le lien vers votre fichier JavaScript ici -->
-
-</body>
-
-</html>
+  <?php include('../includes/footer.php'); ?>

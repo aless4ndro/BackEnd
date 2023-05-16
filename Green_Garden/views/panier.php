@@ -1,29 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-  <title>Document</title>
-</head>
-
-<body>
-  <div class="container mt-5 text-center">
-    <div class="jumbotron">
-      <hr class="my-4">
-      <div class="text-center">
-        <h2><i class="fas fa-shopping-cart"></i> Panier</h2>
-      </div>
-      <hr class="my-4">
-      <div class="text-center">
-        <a class="btn btn-primary btn-lg" href="catalogue.php" role="button">Retour au catalogue</a>
-      </div>
-</body>
-
-</html>
-
 <?php
 session_start();
 
@@ -34,7 +8,7 @@ if (!isset($_SESSION['cart'])) {
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "my-secret-pw";
+$password = "new_password";
 $dbname = "greengarden";
 
 try {
@@ -51,17 +25,64 @@ try {
     $product['quantity'] = $quantity;
     $cartProducts[] = $product;
   }
-
-  // Afficher les produits du panier
-  foreach ($cartProducts as $product) {
-    echo '<h2>' . $product['Nom_court'] . ' (x' . $product['quantity'] . ')</h2>';
-    echo '<img src="' . $product['Photo'] . '" alt="' . $product['Nom_court'] . '">';
-    echo '<p>' . $product['Nom_Long'] . '</p>';
-    echo '<p>' . $product['Prix_Achat'] . ' €</p>';
-    echo '<a href="remove_from_cart.php?id=' . $product['Id_Produit'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
-  }
 } catch (PDOException $e) {
   echo "Erreur : " . $e->getMessage();
 }
 
 $conn = null;
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Panier</title>
+</head>
+
+<body>
+    <div class="container mt-5 text-center">
+        <div class="jumbotron">
+            <div class="text-center mb-4">
+                <h2><i class="fas fa-shopping-cart"></i> Panier</h2>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-primary btn-lg" href="catalogue.php" role="button">Retour au catalogue</a>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <?php
+                // Afficher les produits du panier
+                if (count($cartProducts) > 0) {
+                    foreach ($cartProducts as $product) {
+                        echo '<div class="col-md-4 mb-4">';
+                        echo '<div class="card h-100 d-flex flex-column">';
+                        echo '<img src="' . $product['Photo'] . '" class="card-img-top" alt="' . $product['Nom_court'] . '">';
+                        echo '<div class="card-body d-flex flex-column">';
+                        echo '<h5 class="card-title">' . $product['Nom_court'] . ' (x' . $product['quantity'] . ')</h5>';
+                        echo '<p class="card-text">' . $product['Nom_Long'] . '</p>';
+                        echo '<p class="card-text">' . $product['Prix_Achat'] . ' €</p>';
+                        echo '<div class="mt-auto">';
+                        echo '<a href="remove_from_cart.php?id=' . $product['Id_Produit'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</a>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    // Afficher un message si le panier est vide
+                    echo '<h2>Votre panier est vide.</h2>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
