@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 15 mai 2023 à 16:39
+-- Généré le : mer. 17 mai 2023 à 16:38
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,7 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `greengarden`
 --
-UPDATE t_d_produit SET Photo = 'https://media.adeo.com/marketplace/LMFR/81965592/8dabea92-60f4-4409-8503-ad5b76b21dc6.jpeg?width=650&height=650&format=jpg&quality=80&fit=bounds' WHERE Id_Produit = 6;
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,9 @@ INSERT INTO `t_d_categorie` (`Id_Categorie`, `Libelle`, `Id_Categorie_Parent`) V
 (9, 'Fleur', 6),
 (10, 'Pot', NULL),
 (11, 'Luminaire Solaire', NULL),
-(12, 'Tuyau d\'arrosage', NULL);
+(12, 'Tuyau d\'arrosage', NULL),
+(13, 'Pellet de bois', NULL),
+(16, 'yayya', NULL);
 
 -- --------------------------------------------------------
 
@@ -312,7 +313,8 @@ CREATE TABLE `t_d_fournisseur` (
 INSERT INTO `t_d_fournisseur` (`Id_Fournisseur`, `Nom_Fournisseur`) VALUES
 (1, 'Pierre'),
 (2, 'Paul'),
-(3, 'Jacques');
+(3, 'Jacques'),
+(4, 'Brando');
 
 -- --------------------------------------------------------
 
@@ -362,12 +364,12 @@ CREATE TABLE `t_d_produit` (
 --
 
 INSERT INTO `t_d_produit` (`Id_Produit`, `Taux_TVA`, `Nom_Long`, `Nom_court`, `Ref_fournisseur`, `Photo`, `Prix_Achat`, `Id_Fournisseur`, `Id_Categorie`) VALUES
-(1, 5.50, 'Bêche pour quelqu\'un qui serait assez grand, genre', 'Bêche pour grand', 'BZFR1589', 'photo1.jpg', 14.90, 1, 2),
-(2, 5.50, 'Bêche pour quelqu\'un qui serait assez petit, genre', 'Bêche pour petit', 'BZFR1592', 'photo2.jpg', 9.90, 1, 2),
-(3, 5.50, 'Le plant d\'aubergine qui déchire sa grand Mère', 'Plant Aubergine', 'JAFR1589', 'photo3.jpg', 1.90, 2, 7),
-(4, 5.50, 'Le plant de fraises qui déchire sa grand Mère', 'Plant Fraises', 'JAFR26895', 'photo4.jpg', 1.90, 2, 8),
-(5, 19.60, 'Le set de 10 lampes qui permet d\'éclairer ton allé', 'Set de 10 lampes', 'LAM0001', 'photo5.jpg', 49.90, 3, 11),
-(6, 19.60, 'Le tuyau d\'arrosage dexception qui s\'allonge et se', 'Tuyai 20m', 'TUY0001', 'photo6.jpg', 24.90, 3, 12);
+(1, 5.50, 'Bêche pour quelqu\'un qui serait assez grand, genre', 'Bêche pour grand', 'BZFR1589', 'https://www.botaniqueeditions.com/4751-large_default/petite-beche-a-main.jpg', 14.90, 1, 2),
+(2, 5.50, 'Bêche pour quelqu\'un qui serait assez petit, genre', 'Bêche pour petit', 'BZFR1592', 'https://www.cdiscount.com/pdt2/6/8/5/1/700x700/auc6486465488685/rw/lot-de-3-outils-de-jardin-personnalise-petite-rate.jpg', 9.90, 1, 2),
+(3, 5.50, 'Le plant d\'aubergine qui déchire sa grand Mère', 'Plant Aubergine', 'JAFR1589', 'https://www.rustica.fr/images/fm060906-040.jpg', 1.90, 2, 7),
+(4, 5.50, 'Le plant de fraises qui déchire sa grand Mère', 'Plant Fraises', 'JAFR26895', 'https://www.rustica.fr/images/fm060906-040.jpg', 1.90, 2, 8),
+(5, 19.60, 'Le set de 10 lampes qui permet d\'éclairer ton allé', 'Set de 10 lampes', 'LAM0001', 'https://archzine.fr/wp-content/uploads/2021/09/fraisier-suspendu-jardini%C3%A8re-quels-soins-plantes-d-exterieur-qui-donnent-des-fruits.jpg', 49.90, 3, 11),
+(6, 19.60, 'Le tuyau d\'arrosage dexception qui s\'allonge et se', 'Tuyai 20m', 'TUY0001', 'https://media.adeo.com/marketplace/LMFR/81965592/8dabea92-60f4-4409-8503-ad5b76b21dc6.jpeg?width=650&height=650&format=jpg&quality=80&fit=bounds', 24.90, 3, 12);
 
 -- --------------------------------------------------------
 
@@ -574,7 +576,7 @@ ALTER TABLE `t_d_adresse`
 -- AUTO_INCREMENT pour la table `t_d_categorie`
 --
 ALTER TABLE `t_d_categorie`
-  MODIFY `Id_Categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id_Categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `t_d_client`
@@ -610,7 +612,7 @@ ALTER TABLE `t_d_facture`
 -- AUTO_INCREMENT pour la table `t_d_fournisseur`
 --
 ALTER TABLE `t_d_fournisseur`
-  MODIFY `Id_Fournisseur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id_Fournisseur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `t_d_produit`
