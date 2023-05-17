@@ -15,10 +15,27 @@
 
     <?php include('../includes/header.php'); 
           include_once 'cart_functions.php';
+          include 'config.php';
     ?>
     <!-- Le contenu de l'en-tête (menu, logo, etc.) sera chargé à partir du fichier header.php -->
+    <style>
+      .card {
+        width: 18rem;
+        margin: 1rem;
+        display: inline-block;
+      }
+      .catalogue{
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 2rem;
+      }
+    </style>
   </header>
-
+  <div class="catalogue mt-5">
+      <a href='catalogue.php'<i class="fas fa-leaf"></i> Catalogue</a>
+    </div>
   <main class="container flex-grow-1">
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-indicators">
@@ -45,10 +62,21 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
+      <h2><i class="fas fa-leaf"></i> Catégories</h2>
     </div>
-    <div class="catalogue mt-5">
-      <a href='catalogue.php'<h2><i class="fas fa-leaf"></i> Catalogue</h2></a>
+
+    <?php
+    $stmt = $conn->query("SELECT * from t_d_categorie");
+    while ($row = $stmt->fetch()) :
+    ?>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><?= $row['Libelle'] ?></h5>
+            <a href="catalogue.php?categorie=<?= $row['Id_Categorie'] ?>" class="btn btn-primary">Voir les produits</a>
+        </div>
     </div>
+<?php endwhile; ?>
+
   </main>
 
 
