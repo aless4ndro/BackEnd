@@ -6,7 +6,7 @@ require 'function.php';
 // Récupération des informations de l'utilisateur connecté
 $host = "localhost"; // Nom d'hôte de la base de données
 $user = "root"; // Nom d'utilisateur de la base de données
-$password_db = "new_password"; // Mot de passe de la base de données
+$password_db = "my-secret-pw"; // Mot de passe de la base de données
 $dbname = "greengarden"; // Nom de la base de données
 
 try {
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($existing_product) {
                 $error = "Un produit avec cette référence existe déjà";
             }
-                // Ajout du produit à la base de données
-                try {
+            // Ajout du produit à la base de données
+            try {
                 $stmt = $conn->prepare("INSERT INTO t_d_produit (Nom_Long, Nom_court
 					, Ref_fournisseur, Prix_Achat,
 					 Id_Fournisseur, Id_Categorie,
@@ -71,11 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $product_id = $conn->lastInsertId();
                 header("Location: consult_produit.php?id=$product_id");
                 exit();
-                } catch (PDOException $e) {
+            } catch (PDOException $e) {
                 echo "Erreur: " . $e->getMessage();
                 exit();
-                }
-            } else {
+            }
+        } else {
             echo "Le fichier uploadé n'est pas une image";
         }
     } else {
@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php include('../includes/header.php'); ?>
     <title>Ajout d'un produit</title>
@@ -96,19 +97,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0 auto;
             padding: 20px;
         }
-    
+
         .form-container h1 {
             margin-bottom: 20px;
         }
-    
+
         .form-container .mb-3 {
             margin-bottom: 10px;
         }
-        h1{
+
+        h1 {
             font-family: 'Moo Lah Lah', cursive;
         }
     </style>
 </head>
+
 <body>
     <?php
     // include 'header.php';
@@ -121,68 +124,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif ?>
 
     <?php if (isset($success)) : ?>
-    <p style="color: green"><?= $success ?></p>
-<?php endif ?>
+        <p style="color: green"><?= $success ?></p>
+    <?php endif ?>
 
 
-<div class="form-container">
-    <h1>Ajout d'un produit</h1>
-<form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="nomcourt" class="form-label">Nom :</label>
-        <input type="text" id="nomc" name="nom_court" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="nomlong" class="form-label">Nom long (description):</label>
-        <input type="text" id="noml" name="nom_long" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="reference" class="form-label">Référence Fournisseur:</label>
-        <input type="text" id="reference" name="reference" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="prix" class="form-label">Prix HT Fournisseur:</label>
-        <input type="number" id="prix" name="prix" class="form-control" min="0" step="0.01" required>
-    </div>
-    <div class="mb-3">
-        <label for="tva" class="form-label">Taux TVA:</label>
-        <input type="number" id="tva" name="tva" class="form-control" min="0" step="0.01" required>
-    </div>
-    <div class="mb-3">
-        <label for="categorie" class="form-label">Catégorie :</label>
-        <select name="categorie" class="form-select">
-            <?php
-            $stmt = $conn->query("SELECT * from t_d_categorie");
+    <div class="form-container">
+        <h1>Ajout d'un produit</h1>
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nomcourt" class="form-label">Nom :</label>
+                <input type="text" id="nomc" name="nom_court" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="nomlong" class="form-label">Nom long (description):</label>
+                <input type="text" id="noml" name="nom_long" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="reference" class="form-label">Référence Fournisseur:</label>
+                <input type="text" id="reference" name="reference" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="prix" class="form-label">Prix HT Fournisseur:</label>
+                <input type="number" id="prix" name="prix" class="form-control" min="0" step="0.01" required>
+            </div>
+            <div class="mb-3">
+                <label for="tva" class="form-label">Taux TVA:</label>
+                <input type="number" id="tva" name="tva" class="form-control" min="0" step="0.01" required>
+            </div>
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Catégorie :</label>
+                <select name="categorie" class="form-select">
+                    <?php
+                    $stmt = $conn->query("SELECT * from t_d_categorie");
 
-            if ($stmt->rowCount() > 0) {
-                while ($row = $stmt->fetch()) {
-                    echo "<option>" . $row['Libelle'] . "</option>";
-                }
-            }
-            ?>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="fournisseur" class="form-label">Fournisseur :</label>
-        <select name="fournisseur" class="form-select">
-            <?php
-            $stmt = $conn->query("SELECT * from t_d_fournisseur");
+                    if ($stmt->rowCount() > 0) {
+                        while ($row = $stmt->fetch()) {
+                            echo "<option>" . $row['Libelle'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="fournisseur" class="form-label">Fournisseur :</label>
+                <select name="fournisseur" class="form-select">
+                    <?php
+                    $stmt = $conn->query("SELECT * from t_d_fournisseur");
 
-            if ($stmt->rowCount() > 0) {
-                while ($row = $stmt->fetch()) {
-                    echo "<option value=\"" . $row['Id_Fournisseur'] . "\">" . $row['Nom_Fournisseur'] . "</option>";
-                }
-            }
-            ?>
-        </select>
+                    if ($stmt->rowCount() > 0) {
+                        while ($row = $stmt->fetch()) {
+                            echo "<option value=\"" . $row['Id_Fournisseur'] . "\">" . $row['Nom_Fournisseur'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo :</label>
+                <input type="file" id="photo" name="photo" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="photo" class="form-label">Photo :</label>
-        <input type="file" id="photo" name="photo" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-</form>
-</div>
     <footer>
         <?php include('../includes/footer.php'); ?>
         <!-- Le contenu du pied de page (liens, etc.) sera chargé à partir du fichier footer.php -->

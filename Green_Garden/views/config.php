@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "new_password";
+$password = "my-secret-pw";
 $dbname = "greengarden";
 
 try {
@@ -10,4 +10,3 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-?>

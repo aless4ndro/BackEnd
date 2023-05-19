@@ -2,31 +2,31 @@
 session_start();
 
 if (!isset($_SESSION['cart'])) {
-  $_SESSION['cart'] = [];
+    $_SESSION['cart'] = [];
 }
 
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "new_password";
+$password = "my-secret-pw";
 $dbname = "greengarden";
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  // Récupérer les produits du panier
-  $cartProducts = [];
-  foreach ($_SESSION['cart'] as $productId => $quantity) {
-    $sql = "SELECT * FROM t_d_produit WHERE Id_Produit = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['id' => $productId]);
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    $product['quantity'] = $quantity;
-    $cartProducts[] = $product;
-  }
+    // Récupérer les produits du panier
+    $cartProducts = [];
+    foreach ($_SESSION['cart'] as $productId => $quantity) {
+        $sql = "SELECT * FROM t_d_produit WHERE Id_Produit = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['id' => $productId]);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+        $product['quantity'] = $quantity;
+        $cartProducts[] = $product;
+    }
 } catch (PDOException $e) {
-  echo "Erreur : " . $e->getMessage();
+    echo "Erreur : " . $e->getMessage();
 }
 
 $conn = null;

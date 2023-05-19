@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -43,7 +43,7 @@
             <a class="nav-link" href="#"><i class="fas fa-globe"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./inscription.php"><i class="fas fa-sign-in-alt"></i></a>
+            <a class="nav-link" href="../views/authenticate.php"><i class="fas fa-sign-in-alt"></i></a>
           </li>
 
         </ul>
