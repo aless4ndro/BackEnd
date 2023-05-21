@@ -18,6 +18,8 @@ Après que l'utilisateur a répondu à toutes les questions
 // Initialiser le score à zéro
 
 // Initialiser un tableau avec toutes les questions et les réponses correctes
+// Initialisation du quiz et du score
+
 const quiz = [
   {
     question: "Quel est votre niveau de connaissance en jardinage ?",
@@ -43,33 +45,46 @@ const quiz = [
     correctAnswer: "Je n'ai pas assez d'espace"
   },
 ];
-//Initialiser du quiz et du score
-let score = 0;
-let CurrentQuestionIndex = 0;
 
-//Selectionner les éléments HTML
+let score = 0;
+let currentQuestionIndex = 0;
+
+// Sélection des éléments HTML
+const startQuizButton = document.getElementById('startQuizButton');
+startQuizButton.addEventListener('click', startQuiz);
 const questionElement = document.getElementById("question");
-const answersContainer = document.getElementById("answers");
+const answersContainer = document.getElementById("quiz_form");
 const submitButton = document.getElementById("submit");
 
 function loadQuestion(questionIndex) {
-  //Obtenir la question actuelle
+  // Obtention de la question actuelle
   const currentQuestion = quiz[questionIndex];
 
-  //Effacer les réponses précédentes
+  // Effacement des réponses précédentes
   answersContainer.innerHTML = "";
 
-  //Afficher la question et les reponses
-  questionElement.textContent = question.question;
-  for (let i = 0; i < question.answers.lenth; i++) {
-    answersContainer.textContent = question.answers[i];
-    answer.value = i
+  // Affichage de la question et des réponses
+  questionElement.textContent = currentQuestion.question;
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    let answer = document.createElement("input");
+    answer.textContent = currentQuestion.answers[i];
+    answer.type = "radio";
+    answer.name = "answer";
+    answer.id = "answer" + i;
+    answer.value = i;
+
+    let label = document.createElement("label");
+    label.textContent = currentQuestion.answers[i];
+    label.htmlFor = "answer" + i;
+
+    answersContainer.appendChild(label);
     answersContainer.appendChild(answer);
   }
 }
+
 function checkAnswer(answerIndex) {
-  // Vérifier si la réponse est correcte
-  if (answerIndex === quiz[currentQuestionIndex].correctAnswer) {
+  // Vérification si la réponse est correcte
+  if (quiz[currentQuestionIndex].answers[answerIndex] === quiz[currentQuestionIndex].correctAnswer) {
     score++;
     alert('Correct!');
   } else {
@@ -77,26 +92,49 @@ function checkAnswer(answerIndex) {
   }
 }
 
-// Charger la première question
-loadQuestion(currentQuestionIndex);
+function startQuiz() {
 
-// Ajouter un écouteur d'événements au bouton de soumission
-submitButton.addEventListener('click', () => {
-  const selectedAnswer = document.querySelector('input[type=radio]:checked');
-  if (!selectedAnswer) {
-    alert('Veuillez sélectionner une réponse.');
-    return;
-  }
+  // Masquer le bouton de démarrage du quiz
+  startQuizButton.style.display = "none";
 
-  checkAnswer(Number(selectedAnswer.value));
+  // Montrer le bouton de soumission et la première question
+  submitButton.style.display = "block";
+  questionElement.style.display = "block";
+  answersContainer.style.display = "block";
 
-  // Passer à la question suivante ou terminer le quiz
-  currentQuestionIndex++;
-  if (currentQuestionIndex < quiz.length) {
-    loadQuestion(currentQuestionIndex);
-  } else {
-    alert(`Le quiz est terminé ! Votre score est de ${score}/${quiz.length}.`);
-  }
-});
+  // Charger la première question
+  loadQuestion(currentQuestionIndex);
 
+  // Ajout d'un écouteur d'événements au bouton de soumission
+  submitButton.addEventListener('click', () => {
+    const selectedAnswer = document.querySelector('input[type=radio]:checked');
+    if (!selectedAnswer) {
+      alert('Veuillez sélectionner une réponse.');
+      return;
+    }
 
+    checkAnswer(Number(selectedAnswer.value));
+
+    // Effacer la réponse sélectionnée pour la prochaine question
+    selectedAnswer.checked = false;
+
+    // Passage à la question suivante ou fin du quiz
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quiz.length) {
+      loadQuestion(currentQuestionIndex);
+    } else {
+      alert(`Le quiz est terminé ! Votre score est de ${score}/${quiz.length}.`);
+      // Cache le quiz et montre le bouton de démarrage à nouveau
+      submitButton.style.display = "none";
+      answersContainer.style.display = "none";
+      questionElement.style.display = "none";
+      startQuizButton.style.display = "block";
+      // Réinitialiser l'index de la question et le score pour le prochain démarrage du quiz
+      currentQuestionIndex = 0;
+      score = 0;
+
+      //Charge la premiere question du prochain quiz
+      loadQuestion(currentQuestionIndex);
+    }
+  });
+}

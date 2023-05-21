@@ -60,6 +60,7 @@
       .btn-primary {
         background-color: #2c3e50;
         border-color: #2c3e50;
+        justify-content: center;
       }
 
       .btn-primary:hover {
@@ -86,10 +87,12 @@
       }
 
       #submit {
+        display: none;
         background: #000;
         width: 90px;
         height: 30px;
         margin: auto;
+        margin-top: 30px;
         -webkit-clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
         clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
       }
@@ -99,6 +102,25 @@
         border-color: #2c3e50;
         transform: translateY(-10px);
         transition: 0.5s;
+      }
+
+      input[type='radio'] {
+        transform: scale(1.5);
+        margin: 10px;
+        background-color: #2c3e50;
+        margin-top: 30px;
+      }
+
+      label {
+        font-size: 16px;
+        color: #666;
+      }
+
+
+      #question {
+        color: blue;
+        font-size: 20px;
+        padding: 10px;
       }
     </style>
   </header>
@@ -182,20 +204,25 @@
     <div class="jumbotron2">
       <hr class="my-4">
       <div class="text-center">
-        <img src="https://s.tmimgcdn.com/scr/1200x627/282400/conception-de-banniere-publicitaire-facebook-pour-le-jardin-a-la-maison-09_282448-original.jpg" alt="Votre image" class="img-fluid" style="max-width: 80%;">
+        <img src="https://img.freepik.com/vecteurs-premium/banniere-horizontale-mains-personnes-resolvant-enigmes-jouant-jeu-intellectuel-repondant-questions-quiz-intelligentes-test-intelligence-intellect-illustration-vectorielle-coloree-dans-style-art-ligne_198278-11836.jpg?w=2000" alt="Votre image" class="img-fluid" style="max-width: 80%;">
       </div>
       <div id="quiz_container">
         <h2 id="question"></h2>
-        <div id="answers"></div>
-        <!-- Les réponses seront générées ici -->
-        <a class="btn btn-primary btn-sm" role="button" id="submit"></a>
+        <form id="quiz_form">
+          <!-- Les réponses seront générées ici -->
+        </form>
+        <button class="btn btn-primary btn-sm" id="startQuizButton">Démarrer le Quiz</button>
+        <button class="btn btn-primary btn-sm" role="button" id="submit"></button>
       </div>
     </div>
+  </div>
 
-    <footer>
-      <?php include('../includes/footer.php'); ?>
-      <!-- Le contenu du pied de page (liens, copyright, etc.) sera chargé à partir du fichier footer.php -->
-    </footer>
+
+  <footer>
+    <?php include('../includes/footer.php'); ?>
+    <!-- Le contenu du pied de page (liens, copyright, etc.) sera chargé à partir du fichier footer.php -->
+    <script src="../js/quiz.js"></script>
+  </footer>
 </body>
 
 </html>
