@@ -45,7 +45,9 @@
           <li class="nav-item">
             <a class="nav-link" href="../views/authenticate.php"><i class="fas fa-sign-in-alt"></i></a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" href="../views/logout.php">Déconnexon</a>
+          </li>
         </ul>
       </div>
     </div>

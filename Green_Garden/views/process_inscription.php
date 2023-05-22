@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 $servername = "localhost";
 $username = "root";
 $password = "my-secret-pw";
@@ -68,6 +65,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       ':id_commercial' => $id_commercial
     ]);
 
+
+    // Après avoir créé l'entrée dans la table t_d_client...
+
+    // Récupérer l'Id_Client du nouveau client
+    $id_client = $conn->lastInsertId();
+
+    // Insérer le nouvel utilisateur dans la table t_d_user
+    $sql = "INSERT INTO t_d_user (Login, Password, Id_UserType) VALUES (:login, :password, :user_type)";
+
+    $stmt = $conn->prepare($sql); // Préparer la requête SQL
+
+    $stmt->execute([
+      ':login' => $email,  // Utiliser l'email comme login
+      ':password' => $hashed_password, // Utiliser le même mot de passe
+      ':user_type' => 1 // Utiliser 1 pour le type de l'utilisateur (Client)
+    ]);
+
+    // Mettre à jour l'Id_User dans la table t_d_client pour ce client
+    $id_user = $conn->lastInsertId();
+
+    $sql = "UPDATE t_d_client SET Id_User = :id_user WHERE Id_Client = :id_client";
+
+    $stmt = $conn->prepare($sql); // Préparer la requête SQL
+
+    $stmt->execute([
+      ':id_user' => $id_user,
+      ':id_client' => $id_client
+    ]);
 
 
     // Rediriger 

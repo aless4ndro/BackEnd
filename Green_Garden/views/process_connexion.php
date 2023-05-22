@@ -1,8 +1,8 @@
 <?php
-var_dump($_POST);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
+
+require('config.php');
+
 // Après que l'utilisateur ait soumis le formulaire de connexion...
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = $_POST['email'];
@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Vérifier si l'utilisateur existe et si le mot de passe correspond
   if ($user && password_verify($password, $user['PASSWORD'])) {
-    // Démarrer une nouvelle session et enregistrer l'information de l'utilisateur dans la session
-    session_start();
+    // Enregistrer l'information de l'utilisateur dans la session
     $_SESSION['user_id'] = $user['Id_Client'];
+    $_SESSION['user_email'] = $user['Mail_Client'];
     // Rediriger l'utilisateur vers une page protégée
-    header('Location: /protected_page.php');
+    header('Location: index.php');
     exit();
   } else {
     // Gérer les erreurs d'authentification

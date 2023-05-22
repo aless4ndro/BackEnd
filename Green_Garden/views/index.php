@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
+  echo "L'utilisateur est connecté.";
+} else {
+  echo "L'utilisateur n'est pas connecté.";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
