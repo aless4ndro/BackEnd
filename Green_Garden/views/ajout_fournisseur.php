@@ -27,7 +27,7 @@
 // Récupération des informations de l'utilisateur connecté
 $host = "localhost"; // Nom d'hôte de la base de données
 $user = "root"; // Nom d'utilisateur de la base de données
-$password_db = "my-secret-pw"; // Mot de passe de la base de données
+$password_db = "new_password"; // Mot de passe de la base de données
 $dbname = "greengarden"; // Nom de la base de données
 
 try {

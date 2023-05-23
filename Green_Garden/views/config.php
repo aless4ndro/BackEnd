@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "my-secret-pw";
+$password = "new_password";
 $dbname = "greengarden";
 
 try {

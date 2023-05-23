@@ -8,7 +8,7 @@ if (!isset($_SESSION['cart'])) {
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "my-secret-pw";
+$password = "new_password";
 $dbname = "greengarden";
 
 try {
@@ -81,6 +81,7 @@ $conn = null;
                 }
                 ?>
             </div>
+            <?php include('validation_panier.php'); ?>
         </div>
     </div>
 </body>

@@ -126,7 +126,7 @@
   // Connexion à la base de données (remplacez les valeurs par celles de votre base de données)
   $servername = "localhost";
   $username = "root";
-  $password = "my-secret-pw";
+  $password = "new_password";
   $dbname = "greengarden";
 
   try {
